@@ -13,11 +13,17 @@ class CVApp extends Component {
     }
   }
 
+  setView(newView) {
+    this.setState({
+      view: newView
+    })
+  }
+
   render() {
     if (this.state.view === "edit") {
-      return <EditView content={this.state.content}/>
+      return <EditView content={this.state.content} switcher={(e) => this.setView("display")}/>
     }
-    return <DisplayView content={this.state.content}/>
+    return <DisplayView content={this.state.content} switcher={(e) => this.setView("edit")}/>
   }
 }
 
