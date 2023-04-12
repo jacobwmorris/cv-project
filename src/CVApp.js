@@ -11,19 +11,30 @@ class CVApp extends Component {
       view: "edit",
       content: {}
     }
+
+    this.startEditing = this.startEditing.bind(this)
+    this.doneEditing = this.doneEditing.bind(this)
   }
 
-  setView(newView) {
+  startEditing(event) {
     this.setState({
-      view: newView
+      view: "edit"
+    })
+  }
+
+  doneEditing(event) {
+    //Collect content from the edit mode forms here
+    this.setState({
+      view: "display",
+      //content: newContent
     })
   }
 
   render() {
     if (this.state.view === "edit") {
-      return <EditView content={this.state.content} switcher={(e) => this.setView("display")}/>
+      return <EditView content={this.state.content} switcher={this.doneEditing}/>
     }
-    return <DisplayView content={this.state.content} switcher={(e) => this.setView("edit")}/>
+    return <DisplayView content={this.state.content} switcher={this.startEditing}/>
   }
 }
 
