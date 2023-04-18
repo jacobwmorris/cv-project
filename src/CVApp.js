@@ -10,7 +10,7 @@ class CVApp extends Component {
     this.state = {
       view: "edit",
       content: {
-        general: {}, //Will contain name, email, and phone
+        general: {}, //Will contain name, email, phone, and summary
         education: {},
         employment: {}
       }
@@ -43,6 +43,7 @@ class CVApp extends Component {
     general.name = data.get("name")
     general.email = data.get("email")
     general.phone = data.get("phone")
+    general.summary = data.get("summary")
     return general
   }
 
