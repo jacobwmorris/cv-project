@@ -10,7 +10,7 @@ class CVApp extends Component {
     this.state = {
       view: "edit",
       content: {
-        general: {},
+        general: {}, //Will contain name, email, and phone
         education: {},
         employment: {}
       }
@@ -28,10 +28,22 @@ class CVApp extends Component {
 
   doneEditing(event) {
     //Collect content from the edit mode forms here
+    const newContent = {}
+    const data = new FormData(event.target)
+    newContent.general = this.readContentGeneral(data)
+
     this.setState({
       view: "display",
-      //content: newContent
+      content: newContent
     })
+  }
+
+  readContentGeneral(data) {
+    const general = {}
+    general.name = data.get("name")
+    general.email = data.get("email")
+    general.phone = data.get("phone")
+    return general
   }
 
   render() {
