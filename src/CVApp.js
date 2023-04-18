@@ -9,7 +9,11 @@ class CVApp extends Component {
 
     this.state = {
       view: "edit",
-      content: {}
+      content: {
+        general: {},
+        education: {},
+        employment: {}
+      }
     }
 
     this.startEditing = this.startEditing.bind(this)
