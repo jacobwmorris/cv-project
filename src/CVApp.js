@@ -11,8 +11,8 @@ class CVApp extends Component {
       view: "edit",
       content: {
         general: {}, //Will contain name, email, phone, and summary
-        education: {},
-        employment: {}
+        education: [], //Will contain a list of school, title, start, end
+        employment: []
       }
     }
 
@@ -28,7 +28,12 @@ class CVApp extends Component {
 
   doneEditing(event) {
     //Collect content from the edit mode forms here
-    const newContent = {}
+    const newContent = {
+      general: {},
+      education: [],
+      employment: []
+    }
+    
     const data = new FormData(event.target)
     newContent.general = this.readContentGeneral(data)
 
