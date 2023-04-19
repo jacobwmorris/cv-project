@@ -1,4 +1,5 @@
 import { Component } from "react";
+import BasicInput from "./BasicInput"
 
 class EducationForm extends Component {
   constructor(props) {
@@ -11,6 +12,7 @@ class EducationForm extends Component {
 
     this.addEntry = this.addEntry.bind(this)
     this.removeEntry = this.removeEntry.bind(this)
+    this.changeEntry = this.changeEntry.bind(this)
   }
 
   addEntry(index) {
@@ -30,7 +32,16 @@ class EducationForm extends Component {
 
   removeEntry(index) {
     const newList = this.state.entries.slice()
-    newList.splice(0, 1)
+    newList.splice(index, 1)
+
+    this.setState({
+      entries: newList
+    })
+  }
+
+  changeEntry(index, newEntry) {
+    const newList = this.state.entries.slice()
+    newList.splice(index, 1, newEntry)
 
     this.setState({
       entries: newList
@@ -42,15 +53,18 @@ class EducationForm extends Component {
 
     if (entries.length === 0) {
       return (
-        <button type="button" onClick={(e) => this.addEntry(0)}>+ Add</button>
+        <div>
+          <button type="button" onClick={(event) => this.addEntry(0)}>+ Add</button>
+        </div>
       )
     }
 
     const entriesRendered = entries.map((e, i) => {
       const output = (
         <div key={this.nextEntryKey}>Test #{i}
-          <button type="button" onClick={(event) => this.addEntry(i)}>+ Add</button>
-          <button type="button" onClick={(event) => this.removeEntry(i)}>- Remove</button>
+          <EducationFormEntry entry={e}
+            addCb={(event) => this.addEntry(i)}
+            removeCb={(event) => this.removeEntry(i)}/>
         </div>
       )
 
@@ -61,6 +75,22 @@ class EducationForm extends Component {
     return (
       <div>
         {entriesRendered}
+      </div>
+    )
+  }
+}
+
+class EducationFormEntry extends Component {
+  render() {
+    const {school, title, start, end} = this.props.entry
+
+    return (
+      <div>
+        <BasicInput labelText="School" type="text" name="school" defaultValue={school}/>
+        <div>
+          <button type="button" onClick={this.props.addCb}>+ Add</button>
+          <button type="button" onClick={this.props.removeCb}>- Remove</button>
+        </div>
       </div>
     )
   }
