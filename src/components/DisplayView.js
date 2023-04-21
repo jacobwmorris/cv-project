@@ -3,11 +3,11 @@ import General from "./General"
 
 class DisplayView extends Component {
   render() {
-    const {switcher, content} = this.props
+    const {generalContent, educationContent, employmentContent, switcher} = this.props
 
     return (
       <div>
-        <General content={content.general}/>
+        <General content={generalContent}/>
         <button onClick={switcher}>Edit</button>
       </div>
     )

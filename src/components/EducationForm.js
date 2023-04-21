@@ -6,16 +6,13 @@ class EducationForm extends Component {
     super(props)
     
     this.nextEntryKey = 0
-    this.state = {
-      entries: props.content.slice()
-    }
 
-    this.addEntry = this.addEntry.bind(this)
+    /* this.addEntry = this.addEntry.bind(this)
     this.removeEntry = this.removeEntry.bind(this)
-    this.changeEntry = this.changeEntry.bind(this)
+    this.changeEntry = this.changeEntry.bind(this) */
   }
 
-  addEntry(index) {
+/*   addEntry(index) {
     const newEntry = {
       school: "",
       title: "",
@@ -46,15 +43,15 @@ class EducationForm extends Component {
     this.setState({
       entries: newList
     })
-  }
+  } */
 
   render() {
-    const entries = this.state.entries
+    const entries = this.props.entries
 
-    if (entries.length === 0) {
+    if (!entries || entries.length === 0) {
       return (
         <div>
-          <button type="button" onClick={(event) => this.addEntry(0)}>+ Add</button>
+          <button type="button">+ Add</button>
         </div>
       )
     }
@@ -62,9 +59,7 @@ class EducationForm extends Component {
     const entriesRendered = entries.map((e, i) => {
       const output = (
         <div key={this.nextEntryKey}>Test #{i}
-          <EducationFormEntry entry={e}
-            addCb={(event) => this.addEntry(i)}
-            removeCb={(event) => this.removeEntry(i)}/>
+          <EducationFormEntry entry={e}/>
         </div>
       )
 
@@ -82,14 +77,17 @@ class EducationForm extends Component {
 
 class EducationFormEntry extends Component {
   render() {
-    const {school, title, start, end} = this.props.entry
+    const {school, title, start, end, addCb, removeCb} = this.props.entry
 
     return (
       <div>
-        <BasicInput labelText="School" type="text" name="school" defaultValue={school}/>
+        <BasicInput labelText="School: " type="text" name="ed_school" defaultValue={school}/>
+        <BasicInput labelText="Title of study: " type="text" name="ed_title" defaultValue={title}/>
+        <BasicInput labelText="Start date: " type="date" name="ed_start" defaultValue={start}/>
+        <BasicInput labelText="End date: " type="date" name="ed_end" defaultValue={end}/>
         <div>
-          <button type="button" onClick={this.props.addCb}>+ Add</button>
-          <button type="button" onClick={this.props.removeCb}>- Remove</button>
+          <button type="button">+ Add</button>
+          <button type="button">- Remove</button>
         </div>
       </div>
     )

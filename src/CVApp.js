@@ -9,11 +9,9 @@ class CVApp extends Component {
 
     this.state = {
       view: "edit",
-      content: {
-        general: {}, //Will contain name, email, phone, and summary
-        education: [], //Will contain a list of school, title, start, end
-        employment: []
-      }
+      general: {}, //Will contain name, email, phone, and summary
+      education: [], //Will contain a list of school, title, start, and end
+      employment: []
     }
 
     this.startEditing = this.startEditing.bind(this)
@@ -28,22 +26,22 @@ class CVApp extends Component {
 
   doneEditing(event) {
     //Collect content from the edit mode forms here
-    const newContent = {
+    /* const newContent = {
       general: {},
       education: [],
       employment: []
-    }
+    } */
     
     const data = new FormData(event.target)
-    newContent.general = this.readContentGeneral(data)
+    const newGeneral = this.readGeneralContent(data)
 
     this.setState({
       view: "display",
-      content: newContent
+      general: newGeneral
     })
   }
 
-  readContentGeneral(data) {
+  readGeneralContent(data) {
     const general = {}
     general.name = data.get("name")
     general.email = data.get("email")
@@ -54,9 +52,9 @@ class CVApp extends Component {
 
   render() {
     if (this.state.view === "edit") {
-      return <EditView content={this.state.content} switcher={this.doneEditing}/>
+      return <EditView generalContent={this.state.general} switcher={this.doneEditing}/>
     }
-    return <DisplayView content={this.state.content} switcher={this.startEditing}/>
+    return <DisplayView generalContent={this.state.general} switcher={this.startEditing}/>
   }
 }
 
