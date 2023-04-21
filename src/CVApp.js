@@ -16,6 +16,8 @@ class CVApp extends Component {
 
     this.startEditing = this.startEditing.bind(this)
     this.doneEditing = this.doneEditing.bind(this)
+    this.addEducationEntry = this.addEducationEntry.bind(this)
+    this.removeEducationEntry = this.removeEducationEntry.bind(this)
   }
 
   startEditing(event) {
@@ -24,20 +26,32 @@ class CVApp extends Component {
     })
   }
 
-  doneEditing(event) {
-    //Collect content from the edit mode forms here
-    /* const newContent = {
-      general: {},
-      education: [],
-      employment: []
-    } */
-    
+  doneEditing(event) {    
     const data = new FormData(event.target)
     const newGeneral = this.readGeneralContent(data)
 
     this.setState({
       view: "display",
       general: newGeneral
+    })
+  }
+
+  addEducationEntry(index) {
+    const newList = this.state.education.slice()
+    const newEntry = {school: "", title: "", start: new Date(), end: new Date()}
+    newList.splice(index, 0, newEntry)
+
+    this.setState({
+      education: newList
+    })
+  }
+
+  removeEducationEntry(index) {
+    const newList = this.state.education.slice()
+    newList.splice(index, 1)
+
+    this.setState({
+      education: newList
     })
   }
 
@@ -52,7 +66,16 @@ class CVApp extends Component {
 
   render() {
     if (this.state.view === "edit") {
-      return <EditView generalContent={this.state.general} switcher={this.doneEditing}/>
+      return (
+        <EditView
+        generalContent={this.state.general}
+        educationContent={this.state.education}
+        switcher={this.doneEditing}
+        entryFuncs={{
+          addEducation: this.addEducationEntry,
+          removeEducation: this.removeEducationEntry
+        }}/>
+      )
     }
     return <DisplayView generalContent={this.state.general} switcher={this.startEditing}/>
   }
