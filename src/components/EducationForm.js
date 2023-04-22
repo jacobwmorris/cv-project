@@ -44,10 +44,10 @@ class EducationFormEntry extends Component {
 
     return (
       <div>
-        <BasicInput labelText="School: " type="text" name="ed_school" defaultValue={entry.school}/>
-        <BasicInput labelText="Title of study: " type="text" name="ed_title" defaultValue={entry.title}/>
-        <BasicInput labelText="Start date: " type="date" name="ed_start" defaultValue={entry.start}/>
-        <BasicInput labelText="End date: " type="date" name="ed_end" defaultValue={entry.end}/>
+        <BasicInput labelText="School: " type="text" name="ed_school" defaultVal={entry.school}/>
+        <BasicInput labelText="Title of study: " type="text" name="ed_title" defaultVal={entry.title}/>
+        <BasicInput labelText="Start date: " type="date" name="ed_start" defaultVal={entry.start}/>
+        <BasicInput labelText="End date: " type="date" name="ed_end" defaultVal={entry.end}/>
         <div>
           <button type="button" onClick={addEntry}>+ Add</button>
           <button type="button" onClick={removeEntry}>- Remove</button>

@@ -15,37 +15,13 @@ class CVApp extends Component {
     }
 
     this.startEditing = this.startEditing.bind(this)
-    this.doneEditing = this.doneEditing.bind(this)
+    //this.doneEditing = this.doneEditing.bind(this)
     this.addEducationEntry = this.addEducationEntry.bind(this)
     this.removeEducationEntry = this.removeEducationEntry.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  startEditing(event) {
-    this.setState({
-      view: "edit"
-    })
-  }
-
-  doneEditing(event) {    
-    const data = new FormData(event.target)
-    const newGeneral = this.readGeneralContent(data)
-
-    this.setState({
-      view: "display",
-      general: newGeneral
-    })
-  }
-
-  addEducationEntry(index) {
-    const newList = this.state.education.slice()
-    const newEntry = {school: "", title: "", start: new Date(), end: new Date()}
-    newList.splice(index, 0, newEntry)
-
-    this.setState({
-      education: newList
-    })
-  }
-
+  //Callbacks
   removeEducationEntry(index) {
     const newList = this.state.education.slice()
     newList.splice(index, 1)
@@ -55,13 +31,54 @@ class CVApp extends Component {
     })
   }
 
-  readGeneralContent(data) {
+  handleSubmit(event) {
+    event.preventDefault()
+    const submitter = event.nativeEvent.submitter
+    const controls = event.target.elements
+    if (submitter.hasAttribute("data-btn-done")) {
+      this.doneEditing(controls)
+      return
+    }
+    if (submitter.hasAttribute("data-btn-addedu")) {
+      this.addEducationEntry(controls)
+      return
+    }
+  }
+
+  startEditing(event) {
+    this.setState({
+      view: "edit"
+    })
+  }
+
+  //Class methods
+  doneEditing(formContent) {
+    const newGeneral = this.readGeneralContent(formContent)
+    this.setState({
+      view: "display",
+      general: newGeneral
+    })
+  }
+
+  addEducationEntry(index) {
+    
+  }
+
+  readGeneralContent(formContent) {
     const general = {}
-    general.name = data.get("name")
-    general.email = data.get("email")
-    general.phone = data.get("phone")
-    general.summary = data.get("summary")
+    general.name = formContent.namedItem("name").value
+    general.email = formContent.namedItem("email").value
+    general.phone = formContent.namedItem("phone").value
+    general.summary = formContent.namedItem("summary").value
     return general
+  }
+
+  readEducationContent(data) {
+    const schools = data.getAll("ed_school")
+    const titles = data.getAll("ed_title")
+    const starts = data.getAll("ed_start")
+    const ends = data.getAll("ed_end")
+    return schools.map((s, i) => {return {school: s, title: titles[i], start: starts[i], end: ends[i]}})
   }
 
   render() {
@@ -70,7 +87,7 @@ class CVApp extends Component {
         <EditView
         generalContent={this.state.general}
         educationContent={this.state.education}
-        switcher={this.doneEditing}
+        handleSubmit={this.handleSubmit}
         entryFuncs={{
           addEducation: this.addEducationEntry,
           removeEducation: this.removeEducationEntry
