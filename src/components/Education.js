@@ -1,4 +1,5 @@
 import {Component} from "react"
+import dateToMonth from "../DateToMonth"
 
 class Education extends Component {
   constructor(props) {
@@ -32,37 +33,13 @@ class Education extends Component {
 }
 
 class EducationEntry extends Component {
-  constructor(props) {
-    super(props)
-
-    this.monthNames = {
-      "01": "January",
-      "02": "February",
-      "03": "March",
-      "04": "April",
-      "05": "May",
-      "06": "June",
-      "07": "July",
-      "08": "August",
-      "09": "September",
-      "10": "October",
-      "11": "November",
-      "12": "December"
-    }
-  }
-
-  formatDate(date) {
-    const dateParts = date.split("-", 3)
-    return `${this.monthNames[dateParts[1]]} ${dateParts[0]}`
-  }
-
   render() {
     const {entry} = this.props
 
     return (
       <li>
         <p>{entry.school || "(School name}"}, {entry.title || "(Degree title)"}</p>
-        <p>{entry.start ? this.formatDate(entry.start) : "(Start date)"} - {entry.end ? this.formatDate(entry.end) : "(End date)"}</p>
+        <p>{entry.start ? dateToMonth(entry.start) : "(Start date)"} - {entry.end ? dateToMonth(entry.end) : "(End date)"}</p>
       </li>
     )
   }
