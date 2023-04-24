@@ -1,6 +1,7 @@
 import { Component } from "react"
 import General from "./General"
 import Education from "./Education"
+import Employment from "./Employment"
 
 class DisplayView extends Component {
   render() {
@@ -10,6 +11,7 @@ class DisplayView extends Component {
       <div>
         <General content={generalContent}/>
         <Education entries={educationContent}/>
+        <Employment entries={employmentContent}/>
         <button onClick={handleEdit}>Edit</button>
       </div>
     )
