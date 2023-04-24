@@ -36,6 +36,14 @@ class CVApp extends Component {
       this.removeEducationEntry(data, submitter.getAttribute("data-index"))
       return
     }
+    if (submitter.hasAttribute("data-btn-addemp")) {
+      this.addEmploymentEntry(data, submitter.getAttribute("data-index"))
+      return
+    }
+    if (submitter.hasAttribute("data-btn-rmemp")) {
+      this.removeEmploymentEntry(data, submitter.getAttribute("data-index"))
+      return
+    }
   }
 
   handleEdit(event) {
@@ -48,10 +56,12 @@ class CVApp extends Component {
   doneEditing(data) {
     const newGeneral = this.readGeneralContent(data)
     const newEducation = this.readEducationContent(data)
+    const newEmployment = this.readEmploymentContent(data)
     this.setState({
       view: "display",
       general: newGeneral,
-      education: newEducation
+      education: newEducation,
+      employment: newEmployment
     })
   }
 
@@ -71,6 +81,22 @@ class CVApp extends Component {
     })
   }
 
+  addEmploymentEntry(data, index) {
+    const newEmployment = this.readEmploymentContent(data)
+    newEmployment.splice(index, 0, {company: "", position: "", description: "", start: "", end: ""})
+    this.setState({
+      employment: newEmployment
+    })
+  }
+
+  removeEmploymentEntry(data, index) {
+    const newEmployment = this.readEmploymentContent(data)
+    newEmployment.splice(index, 1)
+    this.setState({
+      employment: newEmployment
+    })
+  }
+
   readGeneralContent(data) {
     const general = {}
     general.name = data.get("name")
@@ -85,7 +111,20 @@ class CVApp extends Component {
     const titles = data.getAll("ed_title")
     const starts = data.getAll("ed_start")
     const ends = data.getAll("ed_end")
-    return schools.map((s, i) => {return {school: s, title: titles[i], start: starts[i], end: ends[i]}})
+    return schools.map((s, i) => {
+      return {school: s, title: titles[i], start: starts[i], end: ends[i]}
+    })
+  }
+
+  readEmploymentContent(data) {
+    const companies = data.getAll("em_company")
+    const positions = data.getAll("em_position")
+    const descriptions = data.getAll("em_description")
+    const starts = data.getAll("em_start")
+    const ends = data.getAll("em_end")
+    return companies.map((c, i) => {
+      return {company: c, position: positions[i], description: descriptions[i], start: starts[i], end: ends[i]}
+    })
   }
 
   render() {
