@@ -15,32 +15,24 @@ class CVApp extends Component {
     }
 
     this.startEditing = this.startEditing.bind(this)
-    //this.doneEditing = this.doneEditing.bind(this)
-    this.addEducationEntry = this.addEducationEntry.bind(this)
-    this.removeEducationEntry = this.removeEducationEntry.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   //Callbacks
-  removeEducationEntry(index) {
-    const newList = this.state.education.slice()
-    newList.splice(index, 1)
-
-    this.setState({
-      education: newList
-    })
-  }
-
   handleSubmit(event) {
     event.preventDefault()
     const submitter = event.nativeEvent.submitter
-    const controls = event.target.elements
+    const data = new FormData(event.target)
     if (submitter.hasAttribute("data-btn-done")) {
-      this.doneEditing(controls)
+      this.doneEditing(data)
       return
     }
     if (submitter.hasAttribute("data-btn-addedu")) {
-      this.addEducationEntry(controls)
+      this.addEducationEntry(data, submitter.getAttribute("data-index"))
+      return
+    }
+    if (submitter.hasAttribute("data-btn-rmedu")) {
+      this.removeEducationEntry(data, submitter.getAttribute("data-index"))
       return
     }
   }
@@ -52,24 +44,38 @@ class CVApp extends Component {
   }
 
   //Class methods
-  doneEditing(formContent) {
-    const newGeneral = this.readGeneralContent(formContent)
+  doneEditing(data) {
+    const newGeneral = this.readGeneralContent(data)
+    const newEducation = this.readEducationContent(data)
     this.setState({
       view: "display",
-      general: newGeneral
+      general: newGeneral,
+      education: newEducation
     })
   }
 
-  addEducationEntry(index) {
-    
+  addEducationEntry(data, index) {
+    const newEducation = this.readEducationContent(data)
+    newEducation.splice(index, 0, {school: "", title: "", start: "", end: ""})
+    this.setState({
+      education: newEducation
+    })
   }
 
-  readGeneralContent(formContent) {
+  removeEducationEntry(data, index) {
+    const newEducation = this.readEducationContent(data)
+    newEducation.splice(index, 1)
+    this.setState({
+      education: newEducation
+    })
+  }
+
+  readGeneralContent(data) {
     const general = {}
-    general.name = formContent.namedItem("name").value
-    general.email = formContent.namedItem("email").value
-    general.phone = formContent.namedItem("phone").value
-    general.summary = formContent.namedItem("summary").value
+    general.name = data.get("name")
+    general.email = data.get("email")
+    general.phone = data.get("phone")
+    general.summary = data.get("summary")
     return general
   }
 

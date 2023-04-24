@@ -9,23 +9,18 @@ class EducationForm extends Component {
   }
 
   render() {
-    const {entries, addEntry, removeEntry} = this.props
+    const {entries} = this.props
 
     if (!entries || entries.length === 0) {
       return (
         <div>
-          <button type="button" onClick={(e) => addEntry(0)}>+ Add</button>
+          <button data-btn-addedu data-index="0">+ Add</button>
         </div>
       )
     }
 
     const entriesRendered = entries.map((e, i) => {
-      const output = (
-        <div key={this.nextEntryKey}>Test #{i}
-          <EducationFormEntry entry={e} addEntry={(event) => addEntry(i + 1)} removeEntry={(event) => removeEntry(i)}/>
-        </div>
-      )
-
+      const output = <EducationFormEntry key={this.nextEntryKey} entry={e} index={i}/>
       this.nextEntryKey++
       return output
     })
@@ -40,7 +35,7 @@ class EducationForm extends Component {
 
 class EducationFormEntry extends Component {
   render() {
-    const {entry, addEntry, removeEntry} = this.props
+    const {entry, index} = this.props
 
     return (
       <div>
@@ -49,8 +44,8 @@ class EducationFormEntry extends Component {
         <BasicInput labelText="Start date: " type="date" name="ed_start" defaultVal={entry.start}/>
         <BasicInput labelText="End date: " type="date" name="ed_end" defaultVal={entry.end}/>
         <div>
-          <button type="button" onClick={addEntry}>+ Add</button>
-          <button type="button" onClick={removeEntry}>- Remove</button>
+          <button data-btn-addedu data-index={index + 1}>+ Add</button>
+          <button data-btn-rmedu data-index={index}>- Remove</button>
         </div>
       </div>
     )
