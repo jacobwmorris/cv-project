@@ -1,6 +1,7 @@
 import { Component } from "react"
-import EducationForm from "./EducationForm"
 import GeneralForm from "./GeneralForm"
+import EducationForm from "./EducationForm"
+import EmploymentForm from "./EmploymentForm"
 
 class EditView extends Component {
   render() {
@@ -15,6 +16,7 @@ class EditView extends Component {
           <h2>Education</h2>
           <EducationForm entries={educationContent}/>
           <h2>Employment history</h2>
+          <EmploymentForm entries={employmentContent}/>
           <button data-btn-done>Done</button>
         </form>
       </div>

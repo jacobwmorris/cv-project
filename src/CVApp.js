@@ -2,6 +2,7 @@ import { Component } from 'react';
 import EditView from './components/EditView';
 import DisplayView from './components/DisplayView';
 import './CVApp.css';
+import { toHaveStyle } from '@testing-library/jest-dom/dist/matchers';
 
 class CVApp extends Component {
   constructor(props) {
@@ -11,7 +12,7 @@ class CVApp extends Component {
       view: "edit",
       general: {}, //Will contain name, email, phone, and summary
       education: [], //Will contain a list of school, title, start, and end
-      employment: []
+      employment: [] //Will contain a list of company, position, description, start, and end
     }
 
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -93,6 +94,7 @@ class CVApp extends Component {
         <EditView
         generalContent={this.state.general}
         educationContent={this.state.education}
+        employmentContent={this.state.employment}
         handleSubmit={this.handleSubmit}/>
       )
     }
@@ -100,6 +102,7 @@ class CVApp extends Component {
       <DisplayView
       generalContent={this.state.general}
       educationContent={this.state.education}
+      employmentContent={this.state.employment}
       handleEdit={this.handleEdit}/>
     )
   }
