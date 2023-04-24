@@ -14,8 +14,8 @@ class CVApp extends Component {
       employment: []
     }
 
-    this.startEditing = this.startEditing.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleEdit = this.handleEdit.bind(this)
   }
 
   //Callbacks
@@ -37,7 +37,7 @@ class CVApp extends Component {
     }
   }
 
-  startEditing(event) {
+  handleEdit(event) {
     this.setState({
       view: "edit"
     })
@@ -93,14 +93,15 @@ class CVApp extends Component {
         <EditView
         generalContent={this.state.general}
         educationContent={this.state.education}
-        handleSubmit={this.handleSubmit}
-        entryFuncs={{
-          addEducation: this.addEducationEntry,
-          removeEducation: this.removeEducationEntry
-        }}/>
+        handleSubmit={this.handleSubmit}/>
       )
     }
-    return <DisplayView generalContent={this.state.general} switcher={this.startEditing}/>
+    return (
+      <DisplayView
+      generalContent={this.state.general}
+      educationContent={this.state.education}
+      handleEdit={this.handleEdit}/>
+    )
   }
 }
 
