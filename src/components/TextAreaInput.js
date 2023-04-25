@@ -1,4 +1,5 @@
 import {Component} from "react"
+import "../style/TextAreaInput.css"
 
 class TextAreaInput extends Component {
   render() {
@@ -8,7 +9,7 @@ class TextAreaInput extends Component {
       <div>
         <label>
           <div>{labelText}</div>
-          <textarea name={name} defaultValue={defaultVal} rows="4" cols="80"></textarea>
+          <textarea name={name} defaultValue={defaultVal} rows="4" className="TextAreaInput-textarea"></textarea>
         </label>
       </div>
     )

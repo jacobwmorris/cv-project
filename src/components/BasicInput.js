@@ -5,9 +5,9 @@ class BasicInput extends Component {
     const {labelText, name, type, defaultVal} = this.props
 
     return (
-      <div>
+      <div className="BasicInput-container">
         <label>{labelText}
-          <input type={type} name={name} defaultValue={defaultVal}/>
+          <input type={type} name={name} defaultValue={defaultVal} className="BasicInput-input"/>
         </label>
       </div>
     )
