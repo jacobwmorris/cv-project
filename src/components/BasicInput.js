@@ -1,4 +1,5 @@
 import {Component} from "react"
+import "../style/BasicInput.css"
 
 class BasicInput extends Component {
   render() {

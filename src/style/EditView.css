@@ -1,0 +1,23 @@
+
+.EditView-container {
+    width: 25rem;
+}
+
+.EditView-underline {
+    border-bottom: 5px double gray;
+}
+
+.EditView-button {
+    margin: 10px 0;
+    border: 2px solid darkgreen;
+    padding: 0.2rem 0.4rem;
+    border-radius: 4px;
+    background-color: green;
+    color: white;
+    font-weight: bold;
+}
+
+.EditView-button:hover {
+    text-decoration: underline;
+    background-color: darkgreen;
+}

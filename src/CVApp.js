@@ -1,8 +1,6 @@
-import { Component } from 'react';
-import EditView from './components/EditView';
-import DisplayView from './components/DisplayView';
-import './CVApp.css';
-import { toHaveStyle } from '@testing-library/jest-dom/dist/matchers';
+import { Component } from 'react'
+import EditView from './components/EditView'
+import DisplayView from './components/DisplayView'
 
 class CVApp extends Component {
   constructor(props) {

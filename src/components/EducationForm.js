@@ -1,5 +1,6 @@
-import { Component } from "react";
+import { Component } from "react"
 import BasicInput from "./BasicInput"
+import "../style/FormStyles.css"
 
 class EducationForm extends Component {
   constructor(props) {
@@ -14,7 +15,7 @@ class EducationForm extends Component {
     if (!entries || entries.length === 0) {
       return (
         <div>
-          <button data-btn-addedu data-index="0">+ Add</button>
+          <button data-btn-addedu data-index="0" className="FormStyles-greenbtn">+ Add</button>
         </div>
       )
     }
@@ -38,14 +39,14 @@ class EducationFormEntry extends Component {
     const {entry, index} = this.props
 
     return (
-      <div>
+      <div className="FormStyles-entry">
         <BasicInput labelText="School: " type="text" name="ed_school" defaultVal={entry.school}/>
         <BasicInput labelText="Title of study: " type="text" name="ed_title" defaultVal={entry.title}/>
         <BasicInput labelText="Start date: " type="date" name="ed_start" defaultVal={entry.start}/>
         <BasicInput labelText="End date: " type="date" name="ed_end" defaultVal={entry.end}/>
         <div>
-          <button data-btn-addedu data-index={index + 1}>+ Add</button>
-          <button data-btn-rmedu data-index={index}>- Remove</button>
+          <button data-btn-addedu data-index={index + 1} className="FormStyles-greenbtn">+ Add</button>
+          <button data-btn-rmedu data-index={index} className="FormStyles-redbtn">- Remove</button>
         </div>
       </div>
     )

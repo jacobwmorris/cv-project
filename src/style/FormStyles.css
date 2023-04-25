@@ -1,0 +1,33 @@
+
+.FormStyles-entry {
+    padding: 1rem;
+    /* background-color: lightgray; */
+    background-image: linear-gradient(90deg, lightgray, white 75%);
+    margin-bottom: 1rem;
+}
+
+.FormStyles-greenbtn {
+    border: 1px solid green;
+    border-radius: 4px;
+    background-color: lightgreen;
+    margin-right: 1rem;
+}
+
+.FormStyles-greenbtn:hover {
+    border: 1px solid green;
+    border-radius: 4px;
+    background-color: green;
+}
+
+.FormStyles-redbtn {
+    border: 1px solid darkred;
+    border-radius: 4px;
+    background-color: orange;
+    margin-right: 1rem;
+}
+
+.FormStyles-redbtn:hover {
+    border: 1px solid darkred;
+    border-radius: 4px;
+    background-color: red;
+}
