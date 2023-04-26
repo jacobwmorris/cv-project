@@ -23,8 +23,8 @@ class Employment extends Component {
 
     return (
       <div>
-        <h2>Employment history</h2>
-        <ul>
+        <h2 className="DisplayStyles-underline">Employment history</h2>
+        <ul className="DisplayStyles-list">
           {entriesRendered}
         </ul>
       </div>
@@ -37,9 +37,11 @@ class EmploymentEntry extends Component {
     const {entry} = this.props
 
     return (
-      <li>
-        <p>{entry.company || "(Company name)"}, {entry.position || "(Position)"}</p>
-        <p>{entry.start ? dateToMonth(entry.start) : "(Start date)"} - {entry.end ? dateToMonth(entry.end) : "(End date)"}</p>
+      <li className="DisplayStyles-smallunderline">
+        <p className="DisplayStyles-bold">{entry.company || "(Company name)"}, {entry.position || "(Position)"}</p>
+        <p className="DisplayStyles-graytext">{
+          entry.start ? dateToMonth(entry.start) : "(Start date)"} - {entry.end ? dateToMonth(entry.end) : "(End date)"
+        }</p>
         <p>{entry.description || "(Job description here)"}</p>
       </li>
     )

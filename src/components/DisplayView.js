@@ -2,6 +2,7 @@ import { Component } from "react"
 import General from "./General"
 import Education from "./Education"
 import Employment from "./Employment"
+import "../style/DisplayStyles.css"
 
 class DisplayView extends Component {
   render() {
@@ -12,7 +13,7 @@ class DisplayView extends Component {
         <General content={generalContent}/>
         <Education entries={educationContent}/>
         <Employment entries={employmentContent}/>
-        <button onClick={handleEdit}>Edit</button>
+        <button onClick={handleEdit} className="DisplayStyles-donebtn">Edit</button>
       </div>
     )
   }

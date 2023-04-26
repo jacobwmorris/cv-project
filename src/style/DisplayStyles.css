@@ -1,0 +1,50 @@
+
+.DisplayStyles-container {
+    width: 25rem;
+}
+
+.DisplayStyles-name {
+    margin: 0;
+}
+
+.DisplayStyles-info-flexbox {
+    padding-bottom: 0.5rem;
+    display: flex;
+    gap: 1.5rem;
+}
+
+.DisplayStyles-graytext {
+    color: #444;
+}
+
+.DisplayStyles-bold {
+    font-weight: bold;
+}
+
+.DisplayStyles-underline {
+    border-bottom: 5px double gray;
+}
+
+.DisplayStyles-smallunderline:not(:last-child) {
+    border-bottom: 2px double lightgray;
+}
+
+.DisplayStyles-list {
+    padding: 0;
+    list-style-type: none;
+}
+
+.DisplayStyles-donebtn {
+    margin: 10px 0;
+    border: 2px solid darkblue;
+    padding: 0.2rem 0.4rem;
+    border-radius: 4px;
+    background-color: blue;
+    color: white;
+    font-weight: bold;
+}
+
+.DisplayStyles-donebtn:hover {
+    text-decoration: underline;
+    background-color: darkblue;
+}

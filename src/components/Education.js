@@ -23,8 +23,8 @@ class Education extends Component {
 
     return (
       <div>
-        <h2>Education</h2>
-        <ul>
+        <h2 className="DisplayStyles-underline">Education</h2>
+        <ul className="DisplayStyles-list">
           {entriesRendered}
         </ul>
       </div>
@@ -37,9 +37,11 @@ class EducationEntry extends Component {
     const {entry} = this.props
 
     return (
-      <li>
-        <p>{entry.school || "(School name)"}, {entry.title || "(Degree title)"}</p>
-        <p>{entry.start ? dateToMonth(entry.start) : "(Start date)"} - {entry.end ? dateToMonth(entry.end) : "(End date)"}</p>
+      <li className="DisplayStyles-smallunderline">
+        <p className="DisplayStyles-bold">{entry.school || "(School name)"}, {entry.title || "(Degree title)"}</p>
+        <p className="DisplayStyles-graytext">{
+          entry.start ? dateToMonth(entry.start) : "(Start date)"} - {entry.end ? dateToMonth(entry.end) : "(End date)"
+        }</p>
       </li>
     )
   }
