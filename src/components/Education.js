@@ -4,9 +4,9 @@ function Education({entries}) {
   if (!entries || entries.length === 0) {
     return null
   }
-
+  
   const entriesRendered = entries.map((e) => {
-    return <EducationEntry /* key={this.nextEntryKey} */ entry={e}/>
+    return <EducationEntry key={e.id} entry={e}/>
   })
 
   return (

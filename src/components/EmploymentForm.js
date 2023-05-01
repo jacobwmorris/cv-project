@@ -12,7 +12,7 @@ function EmploymentForm({entries}) {
   }
 
   const entriesRendered = entries.map((e, i) => {
-    return <EmploymentFormEntry /* key={this.nextEntryKey} */ entry={e} index={i}/>
+    return <EmploymentFormEntry key={e.id} entry={e} index={i}/>
   })
 
   return (

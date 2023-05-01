@@ -6,7 +6,7 @@ function Employment({entries}) {
   }
 
   const entriesRendered = entries.map((e) => {
-    return <EmploymentEntry /* key={this.nextEntryKey} */ entry={e}/>
+    return <EmploymentEntry key={e.id} entry={e}/>
   })
 
   return (

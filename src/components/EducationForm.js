@@ -9,9 +9,9 @@ function EducationForm({entries}) {
       </div>
     )
   }
-
+  
   const entriesRendered = entries.map((e, i) => {
-    return <EducationFormEntry /* key={this.nextEntryKey} */ entry={e} index={i}/>
+    return <EducationFormEntry key={e.id} entry={e} index={i}/>
   })
 
   return (
